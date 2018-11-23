@@ -1,7 +1,13 @@
+# Hack to allow relative import above top level package
+import sys
+import os
+folder = os.path.dirname(os.path.abspath(__file__))  # noqa
+sys.path.insert(0, os.path.normpath("%s/.." % folder))  # noqa
+
 import argparse
 import time
 
-from pyscinanled.led import ScinanLed
+from pyscinanled import ScinanLed
 
 parser = argparse.ArgumentParser()
 parser.add_argument('mac', metavar='Mac', type=str,

@@ -2,6 +2,7 @@ import logging
 import time
 
 from .const import CHAR_START_HANDLE, CHAR_END_HANDLE, CHAR_UUID
+from bluepy.btle import UUID, Peripheral, BTLEException
 
 _LOGGER = logging.getLogger(__name__)
 
