@@ -1,7 +1,7 @@
-from scinanled.btle_connection import BtleConnection
-from scinanled.const import BRIGHTNESS_MAX, BRIGHTNESS_MIN, DEFAULT_RETRIES, \
+from pyscinanled.btle_connection import BtleConnection
+from pyscinanled.const import BRIGHTNESS_MAX, BRIGHTNESS_MIN, DEFAULT_RETRIES, \
     COMMAND_BRIGHTNESS, COMMAND_EFFECT, COMMAND_SWITCH
-from scinanled.effect import Effect
+from pyscinanled.effect import Effect
 
 
 class ScinanLed:

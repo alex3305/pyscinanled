@@ -1,7 +1,7 @@
 import logging
 import time
 
-from scinanled.const import CHAR_START_HANDLE, CHAR_END_HANDLE, CHAR_UUID
+from pyscinanled.const import CHAR_START_HANDLE, CHAR_END_HANDLE, CHAR_UUID
 
 _LOGGER = logging.getLogger(__name__)
 

@@ -1,4 +1,4 @@
-from scinanled.effect import Effect
+from pyscinanled.effect import Effect
 
 BRIGHTNESS_MIN = 10
 BRIGHTNESS_MAX = 110
