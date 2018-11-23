@@ -17,7 +17,7 @@ class BtleConnection:
         return
 
     def connect(self, retry_count: int = 0):
-        if retry_count > self._retries:
+        if retry_count >= self._retries:
             raise TimeoutError('Could not reach device ' + self._mac)
 
         try:
@@ -26,14 +26,15 @@ class BtleConnection:
             self._characteristic = self._device.getCharacteristics(
                 CHAR_START_HANDLE, CHAR_END_HANDLE, UUID(CHAR_UUID))[0]
         except BTLEException:
-            _LOGGER.warning("Could not connect to %s, retrying...")
+            _LOGGER.warning("Could not connect to %s, retrying...", self._mac)
             time.sleep(1)
             self.connect(retry_count + 1)
 
     def disconnect(self):
-        self._device.disconnect()
-        self._device = None
-        self._characteristic = None
+        if self._device is not None:
+            self._device.disconnect()
+            self._device = None
+            self._characteristic = None
 
     def send_command(self, command):
         self._characteristic.write(bytearray(command))

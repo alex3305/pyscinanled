@@ -10,7 +10,7 @@ import time
 from pyscinanled import ScinanLed
 
 parser = argparse.ArgumentParser()
-parser.add_argument('mac', metavar='Mac', type=str,
+parser.add_argument('mac', dest='mac', type=str,
                     help='MAC address of bluetooth device')
 
 args = parser.parse_args()

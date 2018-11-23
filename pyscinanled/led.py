@@ -19,32 +19,34 @@ class ScinanLed:
             brightness = BRIGHTNESS_MIN
 
         command = COMMAND_BRIGHTNESS.copy()
-        self._connection.send_command(command.append(brightness))
+        command.append(brightness)
+        self._connection.send_command(command)
 
     def disconnect(self):
         self._connection.disconnect()
 
     def effect(self, effect: Effect = None, effects: list = None,
                bitmask: int = None):
-        e = 0
+        command = COMMAND_EFFECT.copy()
 
         if effect is not None:
-            e = effect.Value
+            command.append(effect.Value)
         elif effects is not None:
-            e = Effect.combine_effects(effects)
+            command.append(Effect.combine_effects(effects))
         elif bitmask is not None:
-            e = bitmask
+            command.append(bitmask)
 
-        command = COMMAND_EFFECT.copy()
-        self._connection.send_command(command.append(e))
+        self._connection.send_command(command)
 
     def turn_on(self):
         command = COMMAND_SWITCH.copy()
-        self._connection.send_command(command.append(0x01))
+        command.append(0x01)
+        self._connection.send_command(command)
 
     def turn_off(self):
         command = COMMAND_SWITCH.copy()
-        self._connection.send_command(command.append(0x00))
+        command.append(0x00)
+        self._connection.send_command(command)
 
     def __del__(self):
         self.disconnect()
