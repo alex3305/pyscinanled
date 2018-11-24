@@ -7,7 +7,8 @@ sys.path.insert(0, os.path.normpath("%s/.." % folder))  # noqa
 import argparse
 import time
 
-from pyscinanled import ScinanLed
+from pyscinanled import ScinanLed, Effect, EFFECT_LIST
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', dest='mac', type=str,
@@ -22,18 +23,15 @@ if args.mac is None:
 print('Connecting to your led strip...')
 dev = ScinanLed(args.mac)
 
-print('Turning on your led strip')
-dev.turn_on()
+print('Activating a random effect')
+dev.effect(Effect.get_random_effect(EFFECT_LIST))
 time.sleep(5)
 
-print('Set the brightness to 20%')
-dev.brightness(20)
+print('Activating all effects')
+dev.effect(Effect.combine_effects(EFFECT_LIST))
 time.sleep(5)
 
-print('Set the brightness to 100%')
-dev.brightness(100)
-time.sleep(5)
+print('Returning to constant effect')
+dev.effect(Effect.get_effect(EFFECT_LIST, name='Stay on'))
 
-print('Turning off the led strip and disconnect')
-dev.turn_off()
 dev.disconnect()
